@@ -45,8 +45,16 @@
     .project:nth-child(3n+2){grid-column:span 5}
     .project:nth-child(3n+3){grid-column:span 7}
     .project[hidden]{display:none}
-    .project-art{aspect-ratio:1.05;position:relative;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px}
-    .art-inner{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}\n    .project-art img{width:100%;height:100%;object-fit:contain;display:block}\n    .case-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px}\n    .case-images img{width:100%;height:auto;display:block;background:#fff}\n    @media(max-width:600px){.case-images{grid-template-columns:1fr}}
+    
+    /* 主页卡片样式优化：固定宽高比，图片铺满裁切，绝不留奇怪白边 */
+    .project-art{aspect-ratio:1.05;position:relative;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;border-radius:4px;}
+    .art-inner{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .project-art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease;}
+    
+    /* 弹窗内图片单列展示优化 */
+    .case-images{display:grid;grid-template-columns:1fr;gap:20px;margin-top:28px}
+    .case-images img{width:100%;height:auto;display:block;background:#fff;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+    
     .art-inner:before{content:"";position:absolute;width:65%;height:120%;border:1px solid rgba(255,255,255,.5);transform:rotate(28deg);left:-15%;top:-10%}
     .art-inner:after{content:"";position:absolute;width:45%;height:140%;border:1px solid rgba(0,0,0,.13);transform:rotate(28deg);right:-5%;top:-20%}
     .art-1{background:#d7d1c5}.art-2{background:#c7d1c9}.art-3{background:#dfb6a6}.art-4{background:#e1d9c6}.art-5{background:#c7c2d5}.art-6{background:#d4d8d8}
@@ -57,7 +65,10 @@
     .project-info h3{font-size:17px;font-weight:600;margin:0 0 4px;letter-spacing:-.03em}
     .project-info p{font-size:12px;color:var(--muted);margin:0}
     .project-num{font-family:var(--serif);font-size:18px;color:var(--muted)}
-    .project:hover .art-title{transform:scale(1.035);transition:transform .4s}
+    
+    /* 鼠标悬停时卡片图片微微放大 */
+    .project:hover .project-art img{transform:scale(1.03);}
+    
     .about{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:50px 0 100px;border-top:1px solid var(--line)}
     .about h2{font-size:clamp(32px,5vw,62px);line-height:1.03;letter-spacing:-.07em;font-weight:550;margin:0}
     .about-copy{max-width:510px}
@@ -73,16 +84,23 @@
     .contact-link{font-size:14px;border-bottom:1px solid #77766f;padding-bottom:7px;white-space:nowrap}
     .contact-link:hover{color:#f0a08d;border-color:#f0a08d}
     .footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #4a4a44;padding-top:18px;color:#a6a59c;font-size:10px;letter-spacing:.06em}
-    .modal{position:fixed;inset:0;background:rgba(20,20,18,.72);z-index:10;display:none;overflow:auto;padding:30px}
+    
+    /* 弹窗背景与容器 */
+    .modal{position:fixed;inset:0;background:rgba(20,20,18,.72);z-index:10;display:none;overflow-y:auto;padding:30px}
     .modal.open{display:block}
-    .modal-panel{max-width:900px;margin:4vh auto;background:var(--paper);padding:clamp(22px,5vw,56px);position:relative}
-    .modal-close{position:absolute;right:20px;top:18px;border:1px solid var(--line);background:transparent;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px}
+    .modal-panel{max-width:1000px;margin:4vh auto;background:var(--paper);padding:clamp(22px,5vw,56px);position:relative;border-radius:8px;}
+    
+    /* 弹窗关闭按钮固定在右上角，更方便长图浏览 */
+    .modal-close{position:sticky;top:0;float:right;border:1px solid var(--line);background:var(--paper);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px;z-index:20;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+    .modal-close:hover{background:#e0ddd4}
+    
     .modal-kicker{font-size:11px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
     .modal h2{font-size:clamp(34px,6vw,70px);letter-spacing:-.07em;line-height:1;margin:18px 0}
     .modal p{max-width:650px;line-height:1.9;color:#57564f}
-    .modal-note{margin-top:30px;padding:18px;border:1px dashed #b6b1a6;font-size:12px;color:#68675f}
+    .modal-note{margin-top:30px;padding:18px;border:1px dashed #b6b1a6;font-size:12px;color:#68675f;border-radius:4px;}
     .reveal{animation:rise .7s both}
     @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    
     @media(max-width:760px){
       .wrap{width:min(100% - 36px,600px)}
       .topbar{height:64px}.nav{gap:14px}.nav a:nth-child(2){display:none}.availability{display:none}
@@ -96,13 +114,8 @@
       .about{grid-template-columns:1fr;gap:30px;padding:36px 0 65px}
       .contact-top{align-items:start;flex-direction:column;padding-bottom:55px}
       .footer{flex-direction:column}
-      .modal{padding:12px}.modal-panel{margin:2vh auto}
+      .modal{padding:12px}.modal-panel{margin:2vh auto;padding:20px}
     }
- img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
   </style>
 </head>
 <body>
@@ -146,28 +159,34 @@
       </div>
 
       <div class="projects">
+        <!-- 注意：下面卡片里的 src 变成了带 -1 的封面图 -->
         <article class="project" data-category="commerce" tabindex="0" role="button" aria-label="查看电商详情页设计项目">
-          <div class="project-art"><img src="assets/ecommerce-detail.jpg" alt="电商详情页设计作品预览" loading="lazy"></div>
+          <div class="project-art"><img src="assets/ecommerce-detail-1.jpg" alt="电商详情页设计作品预览" loading="lazy"></div>
           <div class="project-info"><div><h3>电商详情页设计</h3><p>多品类产品详情页与店铺视觉</p></div><span class="project-num">01</span></div>
         </article>
+        
         <article class="project" data-category="live" tabindex="0" role="button" aria-label="查看海尔直播视觉项目">
-          <div class="project-art"><img src="assets/livestream-visual.jpg" alt="直播间视觉设计作品预览" loading="lazy"></div>
+          <div class="project-art"><img src="assets/livestream-visual-1.jpg" alt="直播间视觉设计作品预览" loading="lazy"></div>
           <div class="project-info"><div><h3>直播间视觉设计</h3><p>海尔智家 · 净水 / 热水产业</p></div><span class="project-num">02</span></div>
         </article>
+        
         <article class="project" data-category="commerce" tabindex="0" role="button" aria-label="查看品牌电商营销项目">
-          <div class="project-art"><img src="assets/campaign-posters.jpg" alt="电商营销海报作品预览" loading="lazy"></div>
+          <div class="project-art"><img src="assets/campaign-posters-1.jpg" alt="电商营销海报作品预览" loading="lazy"></div>
           <div class="project-info"><div><h3>电商营销海报</h3><p>多行业品牌营销视觉</p></div><span class="project-num">03</span></div>
         </article>
+        
         <article class="project" data-category="brand" tabindex="0" role="button" aria-label="查看品牌视觉规范项目">
-          <div class="project-art"><img src="assets/brand-vi.jpg" alt="海外电商品牌视觉规范作品预览" loading="lazy"></div>
+          <div class="project-art"><img src="assets/brand-vi-1.jpg" alt="海外电商品牌视觉规范作品预览" loading="lazy"></div>
           <div class="project-info"><div><h3>海外电商品牌 VI</h3><p>品牌视觉规范与延展设计</p></div><span class="project-num">04</span></div>
         </article>
+        
         <article class="project" data-category="commerce" tabindex="0" role="button" aria-label="查看产品详情页项目">
-          <div class="project-art"><img src="assets/packaging-design.jpg" alt="包装设计作品预览" loading="lazy"></div>
+          <div class="project-art"><img src="assets/packaging-design-1.jpg" alt="包装设计作品预览" loading="lazy"></div>
           <div class="project-info"><div><h3>包装设计</h3><p>包装结构与视觉延展</p></div><span class="project-num">05</span></div>
         </article>
+        
         <article class="project" data-category="brand" tabindex="0" role="button" aria-label="查看综合创意项目">
-          <div class="project-art"><img src="assets/digital-3c.jpg" alt="数码3C电商营销视觉作品预览" loading="lazy"></div>
+          <div class="project-art"><img src="assets/digital-3c-1.jpg" alt="数码3C电商营销视觉作品预览" loading="lazy"></div>
           <div class="project-info"><div><h3>数码 3C 营销视觉</h3><p>数码产品推广与电商活动素材</p></div><span class="project-num">06</span></div>
         </article>
       </div>
@@ -205,40 +224,102 @@
       <div class="modal-kicker" id="modalKicker">PROJECT CASE STUDY</div>
       <h2 id="modalTitle">项目标题</h2>
       <p id="modalDesc"></p>
-      <div class="case-images" id="caseImages"></div><div class="modal-note"><strong>发布提醒：</strong>这些预览图来自你上传的作品集 PDF。公开网站前，请确认相关客户作品具备展示授权，并删除任何不宜公开的项目资料。</div>
+      <!-- 图片会被 JS 插入到这个容器里 -->
+      <div class="case-images" id="caseImages"></div>
+      <div class="modal-note"><strong>发布提醒：</strong>这些预览图来自你的作品集。公开网站前，请确认相关客户作品具备展示授权，并删除任何不宜公开的项目资料。</div>
     </div>
   </div>
 
   <script>
     const filters = document.querySelectorAll('.filter');
     const projects = document.querySelectorAll('.project');
+    
+    // 分类筛选逻辑
     filters.forEach(btn => btn.addEventListener('click', () => {
       filters.forEach(b => b.classList.toggle('active', b === btn));
       const chosen = btn.dataset.filter;
       projects.forEach(card => card.hidden = chosen !== 'all' && card.dataset.category !== chosen);
     }));
+
     const modal = document.getElementById('projectModal');
     const closeBtn = document.querySelector('.modal-close');
+    
+    // 每个项目现在有 4 张图片，放在最后的数组 [] 里。
+    // 如果你只有 3 张图，把多余的删掉即可。
     const projectData = [
-      ["01 / E-COMMERCE","电商详情页设计","作品集第 5 页展示了粉色系产品详情页及店铺视觉；网页预览取自原 PDF 页面。建议后续补充项目背景、本人负责范围与设计策略。",["assets/ecommerce-detail.jpg"]],
-      ["02 / LIVESTREAM","直播间视觉设计","作品集第 11 页展示直播间背景、产品展示及营销贴片等视觉素材。简历提及相关直播间平均停留时长提升约 30%；正式公开前请确认统计口径及个人贡献。",["assets/livestream-visual.jpg"]],
-      ["03 / CAMPAIGN","电商营销海报","作品集第 9 页展示系列海报视觉。可以进一步补充营销目标、视觉概念、系列延展逻辑及实际投放场景。",["assets/campaign-posters.jpg"]],
-      ["04 / BRAND IDENTITY","海外电商品牌 VI","作品集第 24 页展示海外电商品牌 VI 规范手册相关呈现。公开发布前，请确认客户名称、品牌资料及规范页面可对外展示。",["assets/brand-vi.jpg"]],
-      ["05 / PACKAGING","包装设计","作品集第 25 页展示包装设计展开与视觉应用。建议补充包装设计目标、结构限制、设计规范和最终落地效果。",["assets/packaging-design.jpg"]],
-      ["06 / DIGITAL 3C","数码 3C 营销视觉","作品集第 17 页展示数码 3C 产品营销视觉。建议挑选最能代表个人能力的 2—3 张单图，并补充创意说明。",["assets/digital-3c.jpg"]]
+      [
+        "01 / E-COMMERCE", 
+        "电商详情页设计", 
+        "展示多品类产品详情页及店铺视觉，以清晰的逻辑与视觉层次提升产品转化。", 
+        ["assets/ecommerce-detail-1.jpg", "assets/ecommerce-detail-2.jpg", "assets/ecommerce-detail-3.jpg", "assets/ecommerce-detail-4.jpg"]
+      ],
+      [
+        "02 / LIVESTREAM", 
+        "直播间视觉设计", 
+        "展示直播间背景、产品展示及营销贴片等视觉素材，提升用户停留时长。", 
+        ["assets/livestream-visual-1.jpg", "assets/livestream-visual-2.jpg", "assets/livestream-visual-3.jpg", "assets/livestream-visual-4.jpg"]
+      ],
+      [
+        "03 / CAMPAIGN", 
+        "电商营销海报", 
+        "系列海报视觉展示，包含营销目标、视觉概念及实际投放场景。", 
+        ["assets/campaign-posters-1.jpg", "assets/campaign-posters-2.jpg", "assets/campaign-posters-3.jpg", "assets/campaign-posters-4.jpg"]
+      ],
+      [
+        "04 / BRAND IDENTITY", 
+        "海外电商品牌 VI", 
+        "展示海外电商品牌 VI 规范手册及品牌延展呈现。", 
+        ["assets/brand-vi-1.jpg", "assets/brand-vi-2.jpg", "assets/brand-vi-3.jpg", "assets/brand-vi-4.jpg"]
+      ],
+      [
+        "05 / PACKAGING", 
+        "包装设计", 
+        "展示包装设计展开与视觉应用，包含结构限制与最终落地效果。", 
+        ["assets/packaging-design-1.jpg", "assets/packaging-design-2.jpg", "assets/packaging-design-3.jpg", "assets/packaging-design-4.jpg"]
+      ],
+      [
+        "06 / DIGITAL 3C", 
+        "数码 3C 营销视觉", 
+        "展示数码 3C 产品营销视觉，代表个人能力的单图及创意说明。", 
+        ["assets/digital-3c-1.jpg", "assets/digital-3c-2.jpg", "assets/digital-3c-3.jpg", "assets/digital-3c-4.jpg"]
+      ]
     ];
+
+    // 弹窗生成逻辑
     function openProject(i){
       document.getElementById('modalKicker').textContent = projectData[i][0];
       document.getElementById('modalTitle').textContent = projectData[i][1];
-      document.getElementById('modalDesc').textContent = projectData[i][2];\n      const gallery = document.getElementById('caseImages'); gallery.innerHTML = '';\n      projectData[i][3].forEach(src => { const img = document.createElement('img'); img.src = src; img.alt = projectData[i][1] + '作品图片'; gallery.appendChild(img); });
-      modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+      document.getElementById('modalDesc').textContent = projectData[i][2];
+      
+      const gallery = document.getElementById('caseImages'); 
+      gallery.innerHTML = ''; // 清空旧图片
+      
+      // 遍历该项目的所有图片并生成 img 标签
+      projectData[i][3].forEach(src => { 
+        const img = document.createElement('img'); 
+        img.src = src; 
+        img.alt = projectData[i][1] + '作品图片'; 
+        img.loading = 'lazy'; // 开启懒加载，长图很多时加载更快
+        gallery.appendChild(img); 
+      });
+      
+      modal.classList.add('open'); 
+      modal.setAttribute('aria-hidden','false'); 
+      document.body.style.overflow='hidden'; // 禁止背景滚动
       closeBtn.focus();
     }
+
+    // 卡片点击绑定
     projects.forEach((card,i)=>{
       card.addEventListener('click',()=>openProject(i));
       card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openProject(i)}});
     });
-    function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow=''; // 恢复背景滚动
+    }
     closeBtn.addEventListener('click',closeModal);
     modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
