@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2ed">
+  <meta name="description" content="徐在睿的个人设计作品集，涵盖电商视觉、品牌设计、直播视觉与跨境电商。">
+  <title>徐在睿 — Visual Designer</title>
+  <style>
+    :root{
+      --paper:#f4f2ed; --ink:#20201e; --muted:#77766f; --line:#d8d5cc;
+      --accent:#d64d35; --white:#fffefa; --serif: Georgia, "Times New Roman", "Noto Serif SC", serif;
+      --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(1320px, calc(100% - 64px));margin:auto}
+    .topbar{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    .brand{font-weight:750;letter-spacing:-.04em;font-size:15px}
+    .nav{display:flex;gap:28px;align-items:center}
+    .nav a{color:#5e5d57;transition:color .2s}
+    .nav a:hover{color:var(--accent)}
+    .availability{display:flex;align-items:center;gap:8px;color:#67665f}
+    .dot{width:7px;height:7px;background:#68856b;border-radius:50%;display:inline-block}
+    .hero{padding:76px 0 66px;display:grid;grid-template-columns:1.25fr .75fr;gap:50px;align-items:end}
+    .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:24px}
+    h1{font-size:clamp(56px,8.7vw,124px);line-height:.91;letter-spacing:-.085em;margin:0;font-weight:650}
+    h1 .serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.08em}
+    .hero-aside{padding-bottom:7px;max-width:370px}
+    .hero-aside p{font-size:16px;line-height:1.8;margin:0 0 24px;color:#56554f}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:8px}
+    .pill{border:1px solid var(--line);padding:8px 11px;border-radius:99px;font-size:11px;color:#5e5d57}
+    .hero-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:18px 0 30px;font-size:11px;color:var(--muted);letter-spacing:.08em}
+    .section-head{display:flex;justify-content:space-between;align-items:end;padding:32px 0 22px;border-top:1px solid var(--line)}
+    .section-head h2{font-size:clamp(28px,4vw,44px);letter-spacing:-.06em;margin:0;font-weight:600}
+    .section-head p{font-size:12px;color:var(--muted);margin:0}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 26px}
+    .filter{background:transparent;border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:12px;color:#66655e;cursor:pointer;transition:.2s}
+    .filter:hover,.filter.active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+    .projects{display:grid;grid-template-columns:repeat(12,1fr);gap:34px 20px;padding-bottom:92px}
+    .project{grid-column:span 6;min-width:0;cursor:pointer}
+    .project:nth-child(3n+2){grid-column:span 5}
+    .project:nth-child(3n+3){grid-column:span 7}
+    .project[hidden]{display:none}
+    .project-art{aspect-ratio:1.05;position:relative;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px}
+    .art-inner{width:100%;height:100%;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}\n    .project-art img{width:100%;height:100%;object-fit:contain;display:block}\n    .case-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px}\n    .case-images img{width:100%;height:auto;display:block;background:#fff}\n    @media(max-width:600px){.case-images{grid-template-columns:1fr}}
+    .art-inner:before{content:"";position:absolute;width:65%;height:120%;border:1px solid rgba(255,255,255,.5);transform:rotate(28deg);left:-15%;top:-10%}
+    .art-inner:after{content:"";position:absolute;width:45%;height:140%;border:1px solid rgba(0,0,0,.13);transform:rotate(28deg);right:-5%;top:-20%}
+    .art-1{background:#d7d1c5}.art-2{background:#c7d1c9}.art-3{background:#dfb6a6}.art-4{background:#e1d9c6}.art-5{background:#c7c2d5}.art-6{background:#d4d8d8}
+    .art-title{position:relative;z-index:1;text-align:center;font-family:var(--serif);font-size:clamp(30px,5vw,70px);line-height:.9;letter-spacing:-.07em;color:#282823;max-width:78%}
+    .art-title small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:18px;line-height:1.5}
+    .art-stamp{position:absolute;z-index:2;right:16px;top:16px;border:1px solid rgba(30,30,25,.45);border-radius:50%;width:56px;height:56px;display:grid;place-items:center;text-align:center;font-size:8px;line-height:1.2;letter-spacing:.1em;transform:rotate(10deg)}
+    .project-info{display:flex;justify-content:space-between;gap:15px;padding-top:13px;align-items:start}
+    .project-info h3{font-size:17px;font-weight:600;margin:0 0 4px;letter-spacing:-.03em}
+    .project-info p{font-size:12px;color:var(--muted);margin:0}
+    .project-num{font-family:var(--serif);font-size:18px;color:var(--muted)}
+    .project:hover .art-title{transform:scale(1.035);transition:transform .4s}
+    .about{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:50px 0 100px;border-top:1px solid var(--line)}
+    .about h2{font-size:clamp(32px,5vw,62px);line-height:1.03;letter-spacing:-.07em;font-weight:550;margin:0}
+    .about-copy{max-width:510px}
+    .about-copy p{margin:0 0 18px;color:#55544e;line-height:1.9;font-size:14px}
+    .facts{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;margin-top:28px;border-top:1px solid var(--line)}
+    .fact{padding:14px 0;border-bottom:1px solid var(--line)}
+    .fact b{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-bottom:4px}
+    .fact span{font-size:13px}
+    .contact{background:#22221f;color:var(--paper);padding:62px 0 32px}
+    .contact-top{display:flex;justify-content:space-between;align-items:end;gap:30px;padding-bottom:70px}
+    .contact h2{font-size:clamp(42px,8vw,100px);line-height:.95;letter-spacing:-.08em;font-weight:550;margin:0}
+    .contact h2 em{font-family:var(--serif);font-weight:400}
+    .contact-link{font-size:14px;border-bottom:1px solid #77766f;padding-bottom:7px;white-space:nowrap}
+    .contact-link:hover{color:#f0a08d;border-color:#f0a08d}
+    .footer{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #4a4a44;padding-top:18px;color:#a6a59c;font-size:10px;letter-spacing:.06em}
+    .modal{position:fixed;inset:0;background:rgba(20,20,18,.72);z-index:10;display:none;overflow:auto;padding:30px}
+    .modal.open{display:block}
+    .modal-panel{max-width:900px;margin:4vh auto;background:var(--paper);padding:clamp(22px,5vw,56px);position:relative}
+    .modal-close{position:absolute;right:20px;top:18px;border:1px solid var(--line);background:transparent;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:20px}
+    .modal-kicker{font-size:11px;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
+    .modal h2{font-size:clamp(34px,6vw,70px);letter-spacing:-.07em;line-height:1;margin:18px 0}
+    .modal p{max-width:650px;line-height:1.9;color:#57564f}
+    .modal-note{margin-top:30px;padding:18px;border:1px dashed #b6b1a6;font-size:12px;color:#68675f}
+    .reveal{animation:rise .7s both}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:760px){
+      .wrap{width:min(100% - 36px,600px)}
+      .topbar{height:64px}.nav{gap:14px}.nav a:nth-child(2){display:none}.availability{display:none}
+      .hero{padding:54px 0 45px;grid-template-columns:1fr;gap:28px}
+      h1{font-size:clamp(62px,17vw,100px)}
+      .hero-aside{max-width:520px}
+      .section-head{align-items:start;gap:10px;flex-direction:column}
+      .projects{grid-template-columns:1fr;gap:30px;padding-bottom:65px}
+      .project,.project:nth-child(3n+2),.project:nth-child(3n+3){grid-column:span 1}
+      .project-art{aspect-ratio:1.2}
+      .about{grid-template-columns:1fr;gap:30px;padding:36px 0 65px}
+      .contact-top{align-items:start;flex-direction:column;padding-bottom:55px}
+      .footer{flex-direction:column}
+      .modal{padding:12px}.modal-panel{margin:2vh auto}
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#top">XU ZAIRUI®</a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#work">作品 / Work</a>
+      <a href="#about">关于 / About</a>
+      <a href="#contact">联系 / Contact ↗</a>
+    </nav>
+    <div class="availability"><span class="dot"></span> Portfolio · 2026</div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="reveal">
+        <div class="eyebrow">Independent visual designer · Qingdao, China</div>
+        <h1>视觉设计<br><span class="serif">with</span> purpose.</h1>
+      </div>
+      <div class="hero-aside reveal">
+        <p>你好，我是徐在睿。专注电商视觉、品牌表达与营销设计，擅长把商业目标转化为清晰、有辨识度的视觉体验。</p>
+        <div class="hero-meta">
+          <span class="pill">E-commerce</span><span class="pill">Brand Identity</span>
+          <span class="pill">Campaign Visuals</span><span class="pill">Cross-border</span>
+        </div>
+      </div>
+    </section>
+    <div class="hero-bottom"><span>精选项目 / SELECTED WORK</span><span>SCROLL TO EXPLORE ↓</span></div>
+
+    <section id="work">
+      <div class="section-head">
+        <h2>精选作品<span style="color:var(--accent)">.</span></h2>
+        <p>Selected projects · Case studies in progress</p>
+      </div>
+      <div class="filters" role="group" aria-label="作品筛选">
+        <button class="filter active" data-filter="all">全部项目 / All</button>
+        <button class="filter" data-filter="commerce">电商视觉</button>
+        <button class="filter" data-filter="live">直播视觉</button>
+        <button class="filter" data-filter="brand">品牌设计</button>
+        <button class="filter" data-filter="crossborder">跨境电商</button>
+      </div>
+
+      <div class="projects">
+        <article class="project" data-category="commerce" tabindex="0" role="button" aria-label="查看电商详情页设计项目">
+          <div class="project-art"><img src="assets/ecommerce-detail.jpg" alt="电商详情页设计作品预览" loading="lazy"></div>
+          <div class="project-info"><div><h3>电商详情页设计</h3><p>多品类产品详情页与店铺视觉</p></div><span class="project-num">01</span></div>
+        </article>
+        <article class="project" data-category="live" tabindex="0" role="button" aria-label="查看海尔直播视觉项目">
+          <div class="project-art"><img src="assets/livestream-visual.jpg" alt="直播间视觉设计作品预览" loading="lazy"></div>
+          <div class="project-info"><div><h3>直播间视觉设计</h3><p>海尔智家 · 净水 / 热水产业</p></div><span class="project-num">02</span></div>
+        </article>
+        <article class="project" data-category="commerce" tabindex="0" role="button" aria-label="查看品牌电商营销项目">
+          <div class="project-art"><img src="assets/campaign-posters.jpg" alt="电商营销海报作品预览" loading="lazy"></div>
+          <div class="project-info"><div><h3>电商营销海报</h3><p>多行业品牌营销视觉</p></div><span class="project-num">03</span></div>
+        </article>
+        <article class="project" data-category="brand" tabindex="0" role="button" aria-label="查看品牌视觉规范项目">
+          <div class="project-art"><img src="assets/brand-vi.jpg" alt="海外电商品牌视觉规范作品预览" loading="lazy"></div>
+          <div class="project-info"><div><h3>海外电商品牌 VI</h3><p>品牌视觉规范与延展设计</p></div><span class="project-num">04</span></div>
+        </article>
+        <article class="project" data-category="commerce" tabindex="0" role="button" aria-label="查看产品详情页项目">
+          <div class="project-art"><img src="assets/packaging-design.jpg" alt="包装设计作品预览" loading="lazy"></div>
+          <div class="project-info"><div><h3>包装设计</h3><p>包装结构与视觉延展</p></div><span class="project-num">05</span></div>
+        </article>
+        <article class="project" data-category="brand" tabindex="0" role="button" aria-label="查看综合创意项目">
+          <div class="project-art"><img src="assets/digital-3c.jpg" alt="数码3C电商营销视觉作品预览" loading="lazy"></div>
+          <div class="project-info"><div><h3>数码 3C 营销视觉</h3><p>数码产品推广与电商活动素材</p></div><span class="project-num">06</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div><div class="eyebrow">A little about me</div><h2>商业思维，<br>视觉表达。<br><span style="font-family:var(--serif);font-style:italic;font-weight:400">Made to matter.</span></h2></div>
+      <div class="about-copy">
+        <p>拥有多年品牌与电商视觉设计经验，曾参与海尔智家及多家知名品牌项目。工作内容覆盖电商活动、直播间视觉、品牌 VI、线下传播物料及跨境电商页面。</p>
+        <p>我关注视觉美感与信息传达之间的平衡，也重视与运营、营销团队的协作。希望通过有逻辑的设计，让品牌表达更清晰，让用户体验更完整。</p>
+        <div class="facts">
+          <div class="fact"><b>FOCUS</b><span>电商 / 品牌 / 营销视觉</span></div>
+          <div class="fact"><b>EXPERIENCE</b><span>多年商业设计经验</span></div>
+          <div class="fact"><b>TOOLS</b><span>PS / AI / AE / Pr / C4D</span></div>
+          <div class="fact"><b>BASED IN</b><span>青岛，中国</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="contact">
+    <div class="wrap">
+      <div class="eyebrow" style="color:#a6a59c">Have a project in mind?</div>
+      <div class="contact-top">
+        <h2>一起做点<br><em>好设计。</em></h2>
+        <a class="contact-link" href="mailto:1543661495@qq.com">1543661495@qq.com ↗</a>
+      </div>
+      <div class="footer"><span>© 2026 XU ZAIRUI · VISUAL DESIGN PORTFOLIO</span><span>DESIGNED WITH INTENTION, BUILT FOR THE WEB.</span><a href="#top">回到顶部 ↑</a></div>
+    </div>
+  </footer>
+
+  <div class="modal" id="projectModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" aria-label="关闭项目详情">×</button>
+      <div class="modal-kicker" id="modalKicker">PROJECT CASE STUDY</div>
+      <h2 id="modalTitle">项目标题</h2>
+      <p id="modalDesc"></p>
+      <div class="case-images" id="caseImages"></div><div class="modal-note"><strong>发布提醒：</strong>这些预览图来自你上传的作品集 PDF。公开网站前，请确认相关客户作品具备展示授权，并删除任何不宜公开的项目资料。</div>
+    </div>
+  </div>
+
+  <script>
+    const filters = document.querySelectorAll('.filter');
+    const projects = document.querySelectorAll('.project');
+    filters.forEach(btn => btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.toggle('active', b === btn));
+      const chosen = btn.dataset.filter;
+      projects.forEach(card => card.hidden = chosen !== 'all' && card.dataset.category !== chosen);
+    }));
+    const modal = document.getElementById('projectModal');
+    const closeBtn = document.querySelector('.modal-close');
+    const projectData = [
+      ["01 / E-COMMERCE","电商详情页设计","作品集第 5 页展示了粉色系产品详情页及店铺视觉；网页预览取自原 PDF 页面。建议后续补充项目背景、本人负责范围与设计策略。",["assets/ecommerce-detail.jpg"]],
+      ["02 / LIVESTREAM","直播间视觉设计","作品集第 11 页展示直播间背景、产品展示及营销贴片等视觉素材。简历提及相关直播间平均停留时长提升约 30%；正式公开前请确认统计口径及个人贡献。",["assets/livestream-visual.jpg"]],
+      ["03 / CAMPAIGN","电商营销海报","作品集第 9 页展示系列海报视觉。可以进一步补充营销目标、视觉概念、系列延展逻辑及实际投放场景。",["assets/campaign-posters.jpg"]],
+      ["04 / BRAND IDENTITY","海外电商品牌 VI","作品集第 24 页展示海外电商品牌 VI 规范手册相关呈现。公开发布前，请确认客户名称、品牌资料及规范页面可对外展示。",["assets/brand-vi.jpg"]],
+      ["05 / PACKAGING","包装设计","作品集第 25 页展示包装设计展开与视觉应用。建议补充包装设计目标、结构限制、设计规范和最终落地效果。",["assets/packaging-design.jpg"]],
+      ["06 / DIGITAL 3C","数码 3C 营销视觉","作品集第 17 页展示数码 3C 产品营销视觉。建议挑选最能代表个人能力的 2—3 张单图，并补充创意说明。",["assets/digital-3c.jpg"]]
+    ];
+    function openProject(i){
+      document.getElementById('modalKicker').textContent = projectData[i][0];
+      document.getElementById('modalTitle').textContent = projectData[i][1];
+      document.getElementById('modalDesc').textContent = projectData[i][2];\n      const gallery = document.getElementById('caseImages'); gallery.innerHTML = '';\n      projectData[i][3].forEach(src => { const img = document.createElement('img'); img.src = src; img.alt = projectData[i][1] + '作品图片'; gallery.appendChild(img); });
+      modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+      closeBtn.focus();
+    }
+    projects.forEach((card,i)=>{
+      card.addEventListener('click',()=>openProject(i));
+      card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openProject(i)}});
+    });
+    function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+    closeBtn.addEventListener('click',closeModal);
+    modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+  </script>
+</body>
+</html>
